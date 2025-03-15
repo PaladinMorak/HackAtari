@@ -26,6 +26,7 @@ setup(
         "notebook",
         "voila",
         "ipywidgets",
+        "aim"
     ],
 )
 
