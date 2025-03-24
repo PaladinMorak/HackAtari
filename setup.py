@@ -28,7 +28,6 @@ setup(
         "ipywidgets",
         "torch",
         "widgetsnbextension"
-        "aim"
     ],
 )
 
