@@ -111,6 +111,9 @@ def eval_run(game='pong',
 
                 action = policy(torch.Tensor(obs).unsqueeze(0))[0]
                 obs, reward, terminated, truncated, _ = env.step(action)
+                
+                action = action.tolist() if isinstance(action, torch.Tensor) else action
+                
                 current_episodes_rewards.append(reward)
                 done = terminated or truncated
 
