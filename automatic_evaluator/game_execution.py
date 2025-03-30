@@ -77,7 +77,7 @@ def eval_run(game='pong',
         full_action_space=full_action_space,
     )
 
-    env_params += f"game:{game}, "
+    env_params = f"game:{game}, "
     env_params += f"modifications:{modifications}, "
     env_params += f"dopamine_pooling:{dopamine_pooling}, "
     env_params += f"game_mode:{game_mode}, "
