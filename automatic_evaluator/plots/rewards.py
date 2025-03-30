@@ -246,17 +246,15 @@ _Smoothing (σ={sigma}) reduces noise while preserving trend patterns._
     plt.subplots_adjust(right=STYLE["subplots_adjust_right"])
     plt.show()
 
-
 def plot_reward_progression(all_logs: List[LogData], selected_game: str):
     """Plot reward progression with standardized styling and contextual description"""
-    if all_logs == []:
+    if not all_logs:
         return
 
     markdown_text = f"""
-### Reward Progression Analysis for {selected_game}
-
-Building on the distribution analysis, this plot shows how rewards evolve across episodes for each modification of **{selected_game}**. The lines represent aggregated (summed) rewards across the episode, revealing performance trends over multiple episodes.
+### This plot shows the rewards obtained by the agent in each episode for different configurations of the game. It provides more insight by using the barplot to visualize the reward per episode for each configuration.
 """
+
     display(Markdown(markdown_text))
 
     unique_mods = _get_sorted_modifications(all_logs)
@@ -265,6 +263,7 @@ Building on the distribution analysis, this plot shows how rewards evolve across
     
     plt.figure(figsize=STYLE["figure_size"])
     plot_data = []
+    
     for mod in unique_mods:
         log = next(log for log in all_logs if log.run_label == mod)
         for episode, reward in enumerate(log.epoch_rewards, 1):
@@ -275,7 +274,7 @@ Building on the distribution analysis, this plot shows how rewards evolve across
             })
     
     df = pd.DataFrame(plot_data)
-    ax = sns.lineplot(
+    ax = sns.barplot(
         data=df,
         x="Episode",
         y="Reward",
@@ -283,13 +282,12 @@ Building on the distribution analysis, this plot shows how rewards evolve across
         hue_order=unique_mods,
         estimator="mean",
         errorbar=None,
-        linewidth=2.5,
         palette=color_map
     )
     
     # Standardized styling
     ax.axhline(0, **STYLE["zero_line"])
-    plt.title(f"Reward Progression Across Episodes", 
+    plt.title(f"Rewards per Episode", 
              fontsize=STYLE["title_fontsize"])
     plt.xlabel("Episode", fontsize=STYLE["axis_label_fontsize"])
     plt.ylabel("Aggregated Reward", fontsize=STYLE["axis_label_fontsize"])
@@ -303,7 +301,6 @@ Building on the distribution analysis, this plot shows how rewards evolve across
     )
     plt.tight_layout()
     plt.show()
-
 ########### Unused Functions (adjusted for completeness) ###########
 
 def plot_non_filtered_accumulated_rewards(all_logs: List[LogData]) -> None:
