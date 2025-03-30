@@ -21,14 +21,15 @@ setup(
     description="Extended Atari Learning Environments",
     long_description=long_description,
     long_description_content_type="text/markdown",
+    python_requires="3.11.11",
     install_requires=[
-        "ocatari",
-        "notebook",
-        "voila",
-        "ipywidgets",
-        "torch",
-        "widgetsnbextension",
-        "tabulate"
+        "ocatari==2.2.1",
+        "notebook==7.3.3",
+        "voila==0.5.8",
+        "ipywidgets==8.1.5",
+        "torch==2.6.0",
+        "widgetsnbextension==4.0.13",
+        "tabulate==0.9.0"
     ],
 )
 
