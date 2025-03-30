@@ -77,6 +77,19 @@ def eval_run(game='pong',
         full_action_space=full_action_space,
     )
 
+    env_params += f"game:{game}, "
+    env_params += f"modifications:{modifications}, "
+    env_params += f"dopamine_pooling:{dopamine_pooling}, "
+    env_params += f"game_mode:{game_mode}, "
+    env_params += "\n\t"
+    env_params += f"difficulty:{difficulty}, "
+    env_params += f"obs_mode:{obs_mode}, "
+    env_params += f"buffer_window_size:{buffer_window_size}, "
+    env_params += f"frameskip:{frameskip}, "
+    env_params += f"repeat_action_probability:{repeat_action_probability}"
+    
+    print(f"Environment parameters: {env_params}")
+    
     avg_results = []
     std_results = []
     total_runs = []
@@ -98,7 +111,7 @@ def eval_run(game='pong',
     for agent_path in agents:
         agent, policy = load_agent(agent_path, env, "cpu")
         
-        print(f"Runing for episodes: {episodes}")
+        print(f"Running for episodes: {episodes}")
         for episode in range(episodes):
             obs, _ = env.reset()
             done = False
