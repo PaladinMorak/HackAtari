@@ -21,7 +21,7 @@ setup(
     description="Extended Atari Learning Environments",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    python_requires="3.11.11",
+    python_requires=">3.11.11",
     install_requires=[
         "ocatari==2.2.1",
         "notebook==7.3.3",
