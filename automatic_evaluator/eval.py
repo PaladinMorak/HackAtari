@@ -6,6 +6,11 @@ from typing import Literal, List, Dict
 
 from log_data import LogData
 
+# numpy warnings undiresable in ui output
+import warnings
+warnings.filterwarnings('ignore')
+
+
 def log_episode_data(log_file, episode_data):
     """appends new episode data at the end of the log json
 
