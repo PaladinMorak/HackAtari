@@ -81,14 +81,13 @@ def eval_run(game='pong',
     env_params += f"modifications:{modifications}, "
     env_params += f"dopamine_pooling:{dopamine_pooling}, "
     env_params += f"game_mode:{game_mode}, "
-    env_params += "\n\t"
     env_params += f"difficulty:{difficulty}, "
     env_params += f"obs_mode:{obs_mode}, "
     env_params += f"buffer_window_size:{buffer_window_size}, "
     env_params += f"frameskip:{frameskip}, "
     env_params += f"repeat_action_probability:{repeat_action_probability}"
     
-    print(f"Environment parameters: {env_params}")
+    print(f"\nEnvironment parameters: {env_params}")
     
     avg_results = []
     std_results = []
@@ -123,6 +122,10 @@ def eval_run(game='pong',
                 step_start_time = time.time()
 
                 action = policy(torch.Tensor(obs).unsqueeze(0))[0]
+                
+                # make compatible with obj model
+                action = action.tolist() if isinstance(action, torch.Tensor) else action
+                
                 obs, reward, terminated, truncated, _ = env.step(action)
                 current_episodes_rewards.append(reward)
                 done = terminated or truncated
